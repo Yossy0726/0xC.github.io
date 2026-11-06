@@ -1,16 +1,18 @@
-# Variational points (unofficial) — ポイント獲得報告まとめ
+# Variational points (unofficial)
 
-単一ファイルの静的サイト（`index.html`）。96 件の報告データは HTML 内に JS 配列として埋め込み済み。外部依存は Google Fonts（Inter）のみで、オフラインでも system フォントで表示できます。
+X 上の**自己申告**による Variational 週次ポイント報告の非公式まとめです。Variational 公式サイトではありません。
+
+サイト: https://yossy0726.github.io/variational-points/
+
+- 単一ファイルの静的サイト（`index.html`）。報告データは HTML 内に埋め込み
+- 外部依存は Google Fonts（Inter）のみ（オフライン時はシステムフォント）
+- タブ直リンク: `#W47` `#W46` `#W45` `#W44` `#overview`
 
 ## ローカルで開く
-- そのまま開く: `index.html` をブラウザにドラッグ、または `file:///workspace/variational-points-summary/index.html`
-- サーバー経由: `cd variational-points-summary && python3 -m http.server 8000` → http://localhost:8000/
 
-URL ハッシュでタブを直接開けます: `#W47` `#W46` `#W45` `#W44` `#overview`
-
-## GitHub Pages
-1. リポジトリのルート（または `/docs`）に `index.html` を置いて push
-2. Settings → Pages → Branch を選択して保存
+- `index.html` をブラウザで開く
+- または `python3 -m http.server 8000` のあと http://localhost:8000/
 
 ---
-0xC / Yossy による公開ポイント報告の整理（非公式）。Variational 公式サイトではありません。
+
+0xC / Yossy による公開ポイント報告の整理（非公式）。数値の出典は各 X 投稿を確認してください。
