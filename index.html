@@ -226,6 +226,7 @@ const ASIA={all:isAsia,jp:isJP,ch:isCH,kr:isKR,other:isOther};
 function parseRank(s){if(!s||s==="—")return Infinity;const m=s.replace(/[#,位]/g,"").match(/(\d+)/);return m?+m[1]:Infinity}
 function fmtPts(n){if(n==null)return"—";const v=Number.isInteger(n)?n:Math.round(n*100)/100;return v.toLocaleString("en-US",{maximumFractionDigits:2})}
 function fmtVolPt(vol,pts){if(vol==null||pts==null||!(pts>0))return"—";const v=vol/pts;if(v>=1e6){const m=v/1e6;const t=m>=10?Math.round(m):Math.round(m*10)/10;return"$"+t+"M"}if(v>=1e3){const k=v/1e3;const t=k>=100?Math.round(k):(k>=10?Math.round(k*10)/10:Math.round(k*10)/10);return"$"+t+"k"}return"$"+Math.round(v)}
+function fmtVol(s){return String(s).replace(/（[^）]*）/g,"").replace(/\([^)]*\)/g,"").trim()}
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const LINK_ICON='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M11 9.5V13H3V5h3.5"/></svg>';
 
@@ -269,7 +270,7 @@ function renderWeek(){
 <td class="who-cell"><div class="who">${esc(r[2])}<small>${esc(r[3])}</small></div></td>
 <td data-k="SS">${r[7]?'<span class="ss">SS</span>':'<span class="raw">—</span>'}</td>
 <td class="num pts" data-k="週次pt">${fmtPts(r[8])}<div class="raw">${esc(r[5])}</div></td>
-<td class="num" data-k="Vol">${esc(r[4])}</td>
+<td class="num" data-k="Vol">${esc(fmtVol(r[4]))}</td>
 <td class="num" data-k="Vol/pt">${fmtVolPt(r[9],r[8])}</td>
 <td class="num" data-k="順位">${esc(r[6])}</td>
 <td data-k="地域"><span class="reg">${esc(r[13])}</span></td>
