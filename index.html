@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variational ポイント獲得報告まとめ（非公式）</title>
+<meta name="description" content="Variational の週次ポイント配布に関する X 上の自己申告報告を整理した非公式まとめ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#4C9AF8; --black:#010612; --slate:#414F62; --white:#FFFFFF;
+  --navy:#1C5BD9; --purple:#862EC2; --red:#C10007; --green:#247129; --teal:#00786F; --steel:#6C829D; --grey:#CED5DF;
+  --surface:#07101F; --surface2:#0C1830; --line:rgba(206,213,223,.12); --line2:rgba(206,213,223,.22);
+  --font:Inter, system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --head:"Zalando Sans","Zalondo", Inter, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--black);color:var(--grey);font-family:var(--font);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(1,6,18,.92);backdrop-filter:blur(8px);z-index:10}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.wordmark{font-family:var(--head);font-weight:700;letter-spacing:-.01em;color:var(--white);font-size:16px;display:flex;align-items:center;gap:10px}
+.wordmark .mark{width:18px;height:18px;border:1.5px solid var(--blue);transform:rotate(45deg)}
+.wordmark small{color:var(--steel);font-weight:500;font-size:13px}
+.badge{font-size:12px;color:var(--steel);border:1px solid var(--line2);padding:2px 8px}
+.hero{padding:48px 0 28px}
+.hero .eyebrow{color:var(--blue);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.hero h1{font-family:var(--head);color:var(--white);font-size:clamp(26px,4.2vw,40px);line-height:1.2;margin:10px 0 12px;font-weight:700;letter-spacing:-.02em}
+.hero p{margin:0;color:var(--grey);max-width:720px}
+.hero .meta{margin-top:14px;font-size:13px;color:var(--steel)}
+/* tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-top:8px;overflow-x:auto}
+.tab{appearance:none;background:none;border:0;color:var(--steel);font:600 14px var(--font);padding:12px 18px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tab .c{font-weight:500;color:var(--slate);margin-left:6px;font-size:12px}
+.tab[aria-selected=true]{color:var(--white);border-bottom-color:var(--blue)}
+.tab[aria-selected=true] .c{color:var(--blue)}
+.tab:hover{color:var(--white)}
+section{padding:28px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-family:var(--head);color:var(--white);font-size:19px;margin:0 0 4px;font-weight:600;letter-spacing:-.01em}
+.cap{color:var(--steel);font-size:13px;margin:0 0 16px}
+/* metrics */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.metric{background:var(--surface);padding:18px 18px 16px}
+.metric .v{font-family:var(--head);font-size:28px;font-weight:700;color:var(--white);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.metric .l{font-size:13px;color:var(--grey);margin-top:2px}
+.metric .d{font-size:12px;color:var(--steel)}
+.props{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:18px}
+.prop{background:var(--surface);padding:12px 16px}
+.prop .k{font-size:12px;color:var(--steel)}
+.prop .val{color:var(--white);font-weight:600;font-variant-numeric:tabular-nums}
+/* bars */
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:110px 1fr 56px;align-items:center;gap:12px;font-size:13px}
+.bar .lab{color:var(--grey)}
+.bar .track{height:10px;background:var(--surface2);position:relative}
+.bar .fill{position:absolute;inset:0 auto 0 0;background:var(--blue)}
+.bar .num{text-align:right;color:var(--white);font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.sub{font-size:13px;color:var(--steel);margin:0 0 10px;font-weight:600}
+/* controls */
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-bottom:14px}
+.seg{display:inline-flex;border:1px solid var(--line2);flex-wrap:wrap}
+.seg button{appearance:none;background:transparent;border:0;border-right:1px solid var(--line2);color:var(--grey);font:500 13px var(--font);padding:7px 12px;cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--blue);color:var(--black);font-weight:600}
+.seg button:hover:not([aria-pressed=true]){background:var(--surface2)}
+.seg button .c{opacity:.7;margin-left:4px;font-size:12px}
+.ctl-label{font-size:12px;color:var(--steel);margin-right:8px}
+.ctl{display:flex;align-items:center}
+select{background:var(--surface);color:var(--white);border:1px solid var(--line2);font:500 13px var(--font);padding:7px 30px 7px 10px;border-radius:0;appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--blue) 50%),linear-gradient(135deg,var(--blue) 50%,transparent 50%);background-position:calc(100% - 15px) 50%,calc(100% - 10px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.subrow{margin:-4px 0 14px;padding-left:12px;border-left:2px solid var(--blue)}
+/* table */
+.tablewrap{overflow-x:auto;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface2);color:var(--steel);font-weight:600;font-size:12px;letter-spacing:.02em;white-space:nowrap;position:sticky;top:0}
+tbody tr:hover{background:rgba(76,154,248,.06)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.pts{color:var(--white);font-weight:600}
+td.date{white-space:nowrap;color:var(--steel);font-variant-numeric:tabular-nums}
+.who{color:var(--white);font-weight:500}
+.who small{display:block;color:var(--steel);font-weight:400;font-size:12px}
+.ss{display:inline-block;font-size:11px;font-weight:600;color:var(--blue);border:1px solid var(--blue);padding:0 5px;line-height:18px}
+.reg{display:inline-block;font-size:12px;color:var(--grey);border:1px solid var(--line2);padding:0 6px;white-space:nowrap}
+.note{color:var(--grey);font-size:12.5px;max-width:380px}
+.raw{color:var(--steel);font-size:12px}
+.link{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-weight:500}
+.link svg{width:13px;height:13px}
+.empty{padding:28px;text-align:center;color:var(--steel)}
+/* callout */
+.callout{border:1px solid var(--line2);border-left:3px solid var(--blue);background:var(--surface);padding:16px 18px}
+.callout b{color:var(--white)}
+.callout ul{margin:8px 0 0;padding-left:18px}
+.callout li{margin:4px 0}
+.callout.warn{border-left-color:var(--steel)}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--steel);font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+[hidden]{display:none!important}
+/* mobile: cards */
+@media (max-width:760px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .two{grid-template-columns:1fr}
+  .bar{grid-template-columns:84px 1fr 44px}
+  .tablewrap{border:0}
+  table,thead,tbody,tr,td{display:block}
+  thead{display:none}
+  tbody tr{border:1px solid var(--line);margin-bottom:10px;padding:10px 12px;background:var(--surface)}
+  td{border:0;padding:3px 0;text-align:left!important}
+  td[data-k]::before{content:attr(data-k);color:var(--steel);font-size:11px;display:inline-block;min-width:64px}
+  td.who-cell{padding-bottom:6px}
+  .note{max-width:none}
+  .top .badge{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="wordmark"><span class="mark" aria-hidden="true"></span>Variational points <small>(unofficial)</small></div>
+  <span class="badge">非公式・自己申告ベース</span>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Weekly points reports</div>
+    <h1>Variational ポイント獲得報告まとめ</h1>
+    <p>配布週ごとの X 上の自己申告をもとに、取引量（Vol）・週次ポイント・順位の目安を比較するための整理です。</p>
+    <div class="meta" id="heroMeta"></div>
+  </div>
+
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+
+  <div id="weekView">
+    <section>
+      <h2 id="wkTitle"></h2>
+      <p class="cap" id="wkCap"></p>
+      <div class="props" id="wkProps"></div>
+      <div id="wkBarsWrap"><p class="sub">地域別件数</p><div class="bars" id="wkBars"></div></div>
+    </section>
+    <section>
+      <h2>報告一覧</h2>
+      <p class="cap" id="tblCap"></p>
+      <div class="controls">
+        <div class="ctl"><span class="ctl-label">地域</span><div class="seg" id="segRegion"></div></div>
+        <div class="ctl"><span class="ctl-label">スクショ</span><div class="seg" id="segSS"></div></div>
+        <div class="ctl"><span class="ctl-label">並び</span>
+          <select id="sortSel" aria-label="並び順">
+            <option value="pts">週次pt 多い順</option>
+            <option value="vol">Vol 多い順</option>
+            <option value="date">新しい順</option>
+            <option value="rank">順位 上位順</option>
+          </select>
+        </div>
+      </div>
+      <div class="controls subrow" id="asiaRow" hidden>
+        <div class="ctl"><span class="ctl-label">アジア内訳</span><div class="seg" id="segAsia"></div></div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>日付</th><th>投稿者</th><th>SS</th><th style="text-align:right">週次pt</th><th style="text-align:right">Vol</th><th>順位</th><th>地域</th><th>メモ</th><th>投稿</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div id="overView" hidden>
+    <section>
+      <h2>要点</h2>
+      <p class="cap">同じ Vol でも週次 pt は桁違いに差が出ます。タブは W44〜W47（W43 は件数が少ないため省略）。RU 語の数値スクショは 0 件。</p>
+      <div class="metrics" id="ovMetrics"></div>
+    </section>
+    <section>
+      <h2>地域別件数</h2>
+      <p class="cap">全期間・全報告。地域は投稿言語・プロフィールからの推定です。</p>
+      <div class="two">
+        <div><p class="sub">地域</p><div class="bars" id="ovBars"></div></div>
+        <div><p class="sub">アジア内訳</p><div class="bars" id="ovAsiaBars"></div></div>
+      </div>
+    </section>
+    <section>
+      <h2>W47 の帯</h2>
+      <p class="cap">配布 2026-11-06（金曜 0:00 UTC）</p>
+      <div class="props" id="ovW47"></div>
+      <p style="margin:0">EU 例 <a href="https://x.com/AtlasThesis/status/2118508108507148378" target="_blank" rel="noopener">@AtlasThesis</a> 280 pt / $25M。CH 例 <a href="https://x.com/mycndota/status/2118514426022355381" target="_blank" rel="noopener">@mycndota</a> 6.44 pt / $6.89M。JP 上位 <a href="https://x.com/coinkeiba/status/2118502923735073069" target="_blank" rel="noopener">@coinkeiba</a> 1,457 pt。</p>
+    </section>
+    <section>
+      <h2>注意事項</h2>
+      <div class="callout">
+        <b>読み方</b>
+        <ul>
+          <li>数値はすべて本人の自己申告です。Variational による公式の数値ではありません。</li>
+          <li>地域は投稿言語・表示名・location などからの推定です（「推定」付きは確度が低め）。本まとめでは中東（UAE/TR 等）をアジアに含めて集計しています。</li>
+          <li>公式の全順位リーダーボードはログインなしでは一括取得できないため、順位は本人が併記した場合のみ掲載しています。</li>
+          <li>「配布メタ」行は個人成績ではなく週全体の配布量・口座数の報告です。</li>
+          <li>@Yoliu_ はジョーク投稿のため除外。W43 はタブ省略（@Zyak1991 週次 23 / $10M、@MaitreSarce 週次 5 / $120–140k）。</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <span>0xC / Yossy による公開ポイント報告の整理（非公式）</span>
+  <span>Variational 公式サイトではありません。各数値の出典は X の元投稿をご確認ください。</span>
+</div></footer>
+
+<script>
+const DATA = [["2026-11-06", "今週(W47)", "@KagurazakaF", "Kagurazaka Fortune", "$7.6M前後", "週次38 / 累計1,818", "824位", true, 38, 7600000, "https://x.com/KagurazakaF/status/2118542139504357539", "JP・スクショあり。BTC/ETH比率↑で効率悪化と本人コメント｜地域根拠:日本語投稿", "2026-11-06 12:13 JST", "アジア/JP"], ["2026-11-06", "今週(W47)", "@chivasxbt", "Chivas", "$7.19M", "週次86.32", "—", false, 86.32, 7190000, "https://x.com/chivasxbt/status/2118518181098860739", "Volほぼ半減でもポイント増と本人｜地域根拠:location: Dubai", "2026-11-06 10:37 JST", "中東"], ["2026-11-06", "今週(W47)", "@hanchooo456", "ハンチョー", "—", "週次109", "—", true, 109, null, "https://x.com/hanchooo456/status/2118504313458979090", "JP・通常トレードのみ/PnLプラス。100pt超え初｜地域根拠:日本語投稿", "2026-11-06 09:42 JST", "アジア/JP"], ["2026-11-06", "今週(W47)", "@coinkeiba", "ツァビ", "—", "週次1,457", "—", true, 1457, null, "https://x.com/coinkeiba/status/2118502923735073069", "JP上位帯。前週2,244から減少。TOP100目標｜地域根拠:日本語投稿", "2026-11-06 09:37 JST", "アジア/JP"], ["2026-11-06", "今週(W47)", "@givenoxbt", "giveno", "$1M", "週次162（紹介込み）", "—", true, 162, 1000000, "https://x.com/givenoxbt/status/2118507476685611499", "OI $550k。紹介ポイントが大きく寄与と本人｜地域根拠:英語・location Onchain", "2026-11-06 09:55 JST", "不明"], ["2026-11-06", "今週(W47)", "@Ryuzaki_SEI", "Ryuzaki SEI", "$3.9M", "週次+237", "—", true, 237, 3900000, "https://x.com/Ryuzaki_SEI/status/2118500034102821238", "OI $1.7M。DN/多銘柄。プロモ色強め｜地域根拠:英語・プロモ色強", "2026-11-06 09:25 JST", "不明"], ["2026-11-06", "今週(W47)", "@roguefox_", "RØGUE FØX", "$1.6M", "週次89", "—", true, 89, 1600000, "https://x.com/roguefox_/status/2118499510494036240", "前週より+20pt（Vol+200k）｜地域根拠:英語", "2026-11-06 09:23 JST", "不明"], ["2026-11-06", "今週(W47)", "@cosmolin2_", "코생", "$4.4M", "週次273.12", "—", true, 273.12, 4400000, "https://x.com/cosmolin2_/status/2118499510787907828", "韓国語圏。スクショ2枚｜地域根拠:韓国語ハンドル/表示名", "2026-11-06 09:23 JST", "アジア/KR"], ["2026-11-06", "今週(W47)", "@Henrik_on_HL", "Henrik", "—", "累計12,683", "75位", true, null, null, "https://x.com/Henrik_on_HL/status/2118499360778465489", "累計＆順位のみ（週次不明）｜地域根拠:英語", "2026-11-06 09:23 JST", "不明"], ["2026-11-06", "今週(W47)", "@sharkcryptottm", "SHARK", "$6M（短時間）", "週次28", "—", true, 28, 6000000, "https://x.com/sharkcryptottm/status/2118497675137909141", "スキャルプ中心で効率低めと本人｜地域根拠:location: Europe", "2026-11-06 09:16 JST", "EU"], ["2026-11-06", "今週(W47)", "@htoomnaing1", "RTM", "—", "週次約1.2", "—", true, 1.2, null, "https://x.com/htoomnaing1/status/2118497112182898778", "少額帯｜地域根拠:ミャンマー系名推定・確度低", "2026-11-06 09:14 JST", "アジア"], ["2026-11-06", "今週(W47)", "@Dhruv_Sniper", "Alpha by Dhruv", "$64.32k", "週次1.93（本人1.57）", "—", true, 1.93, 64320, "https://x.com/Dhruv_Sniper/status/2118532271091442018", "累計150.86。少額帯の効率例｜地域根拠:location: Dubai", "2026-11-06 11:33 JST", "中東"], ["2026-11-06", "今週(W47)", "@bcgganbaru", "mon0414.eth", "—", "週次31", "—", false, 31, null, "https://x.com/bcgganbaru/status/2118528789106118853", "JP・低OIパチンコ言及｜地域根拠:日本語投稿", "2026-11-06 11:19 JST", "アジア/JP"], ["2026-10-30", "前週(W46)", "@coinkeiba", "ツァビ", "$13M", "週次2,244", "—", true, 2244, 13000000, "https://x.com/coinkeiba/status/2115959889155829792", "JP・予想の3倍。過去1ヶ月で最大級の週次報告｜地域根拠:日本語投稿", "2026-10-30 09:12 JST", "アジア/JP"], ["2026-10-30", "前週(W46)", "@hanchooo456", "ハンチョー", "—", "週次55", "—", true, 55, null, "https://x.com/hanchooo456/status/2116016088593080659", "JP｜地域根拠:日本語投稿", "2026-10-30 12:55 JST", "アジア/JP"], ["2026-10-30", "前週(W46)", "@KagurazakaF", "Kagurazaka Fortune", "$5.6M前後", "週次48 / 累計1,780", "821位", true, 48, 5600000, "https://x.com/KagurazakaF/status/2116116996383490157", "JP・OI $550-600k。Swap中心｜地域根拠:日本語投稿", "2026-10-30 19:36 JST", "アジア/JP"], ["2026-10-30", "前週(W46)", "@broodstarmaa", "まーちゃん", "$1.7M", "週次19", "—", true, 19, 1700000, "https://x.com/broodstarmaa/status/2115982623017431400", "JP・Swapのみで効率悪めと本人｜地域根拠:日本語投稿", "2026-10-30 10:42 JST", "アジア/JP"], ["2026-10-30", "前週(W46)", "@StocktraderDK", "StocktraderDK", "—", "週次+30.98 / 累計462.51", "#3748", true, 30.98, null, "https://x.com/StocktraderDK/status/2116089778420727987", "累計順位付き｜地域根拠:ハンドルDK・英語", "2026-10-30 17:48 JST", "EU/DK"], ["2026-10-30", "前週(W46)", "@Robsvr", "RobSVR", "—", "週次2.5 / 累計236.9", "6315位", true, 2.5, null, "https://x.com/Robsvr/status/2116087919764967439", "少額帯｜地域根拠:英語", "2026-10-30 17:40 JST", "不明"], ["2026-10-30", "前週(W46)", "@tinzeyxyz", "tinzeyxbt", "$900K", "週次92", "—", true, 92, 900000, "https://x.com/tinzeyxyz/status/2116246141192884272", "OI $450K。取引回数↓でもOI維持｜地域根拠:英語", "2026-10-31 04:09 JST", "不明"], ["2026-10-30", "前週(W46)", "@Im_SHIVya", "SHIVya", "$923.7K", "週次17.79", "—", true, 17.79, 923700, "https://x.com/Im_SHIVya/status/2116230832486785249", "TradFi中心｜地域根拠:英語", "2026-10-31 03:08 JST", "不明"], ["2026-10-30", "前週(W46)", "@Akkukap", "Akku", "$15M", "週次127", "—", false, 127, 15000000, "https://x.com/Akkukap/status/2116244583009169477", "返信内の数字。平均OI約$100k｜地域根拠:英語", "2026-10-31 04:03 JST", "不明"], ["2026-10-30", "前週(W46)", "@PointsGoblin", "Points Goblin", "$440k", "週次2.79", "—", true, 2.79, 440000, "https://x.com/PointsGoblin/status/2116212920053072333", "DNコスト約$8.18/pt｜地域根拠:英語", "2026-10-31 01:57 JST", "不明"], ["2026-10-30", "前週(W46)", "@liamxzn1", "Liam", "$207.94K", "週次5.25", "—", true, 5.25, 207940, "https://x.com/liamxzn1/status/2116201483389771924", "紹介0・自己取引のみ｜地域根拠:英語", "2026-10-31 01:12 JST", "不明"], ["2026-10-30", "前週(W46)", "@rokyinfl", "roky", "$386k", "週次2.08", "—", true, 2.08, 386000, "https://x.com/rokyinfl/status/2116185441019826305", "OI約$16.5k。コスト約$4.19/pt｜地域根拠:英語", "2026-10-31 00:08 JST", "不明"], ["2026-10-30", "前週(W46)", "@mikhailtoh", "Micha", "$140K", "週次+3.5（累計210超）", "—", true, 3.5, 140000, "https://x.com/mikhailtoh/status/2116174318006608206", "DN+TxFlow。資金調達でコストほぼゼロ｜地域根拠:英語・スラヴ系名", "2026-10-30 23:24 JST", "不明"], ["2026-10-30", "前週(W46)", "@0xpostrich", "post rich", "$2.7M+", "週次53", "—", true, 53, 2700000, "https://x.com/0xpostrich/status/2116169295885746204", "OI $390K。約$51k vol/1pt｜地域根拠:英語", "2026-10-30 23:04 JST", "不明"], ["2026-10-30", "前週(W46)", "@Zyak1991", "Zyak1991", "$168K", "週次5.8", "—", true, 5.8, 168000, "https://x.com/Zyak1991/status/2116164640107311188", "株式・保有8-20h｜地域根拠: location Europe（追加確認）", "2026-10-30 22:45 JST", "EU"], ["2026-10-30", "前週(W46)", "@AIexey_Stark", "Alekzz", "$200k", "週次39", "—", true, 39, 200000, "https://x.com/AIexey_Stark/status/2116158319656108185", "OI約$70k。効率高め帯｜地域根拠:名前Alekzz・英語投稿・Montana記載あり混在", "2026-10-30 22:20 JST", "CIS/RU推定"], ["2026-10-30", "前週(W46)", "@NeedMore_Crypto", "Bros", "$624,544", "週次3.25", "—", true, 3.25, 624544, "https://x.com/NeedMore_Crypto/status/2116256226958864438", "コスト$12.55/pt｜地域根拠:英語", "2026-10-31 04:49 JST", "不明"], ["2026-10-30", "前週(W46)", "@Cryptowithutsav", "Crypto With Patel", "$392K", "週次6.5", "—", false, 6.5, 392000, "https://x.com/Cryptowithutsav/status/2116251419707896238", "OI $10K。コスト$9.51/pt｜地域根拠:Patel姓・英語", "2026-10-31 04:30 JST", "アジア/IN推定"], ["2026-10-30", "前週(W46)", "@0xM_G", "0xMG", "~$2M", "週次12", "—", true, 12, 2000000, "https://x.com/0xM_G/status/2116250290806497596", "OI約$15K｜地域根拠:英語", "2026-10-31 04:26 JST", "不明"], ["2026-10-31", "前週(W46)", "@Steveee_stonks", "Steve_stonks", "$400K", "週次1.4", "—", true, 1.4, 400000, "https://x.com/Steveee_stonks/status/2116561623750259146", "コスト約$7/pt。ファーミング縮小中｜地域根拠:英語", "2026-11-01 01:03 JST", "不明"], ["2026-10-31", "前週(W46)", "@JeffArkensawSAY", "JeffArkensaw", "$75k", "週次1.56", "—", true, 1.56, 75000, "https://x.com/JeffArkensawSAY/status/2116532108260782443", "Lighter RHとのDN｜地域根拠:英語", "2026-10-31 23:05 JST", "不明"], ["2026-10-31", "前週(W46)", "@PanaCapital", "Panagiotti", "$4M（株式）", "週次56", "—", true, 56, 4000000, "https://x.com/PanaCapital/status/2116471004868284539", "2日取引で56pt｜地域根拠:Panagiotti名・英語", "2026-10-31 19:03 JST", "EU/GR推定"], ["2026-10-31", "前週(W46)", "@wdat0709", "Davo Labs", "~$200k", "週次2.7", "—", true, 2.7, 200000, "https://x.com/wdat0709/status/2116388689698062379", "TradFi/低OI Swap中心｜地域根拠:英語", "2026-10-31 13:35 JST", "不明"], ["2026-10-24", "W45付近", "@VictorTopDefiG", "Victor.hl", "$25k（有効分）", "週次1.38", "—", true, 1.38, 25000, "https://x.com/VictorTopDefiG/status/2114024793917763750", "低OI crypto中心。XAUの即時開閉は無効と本人｜地域根拠:英語", "2026-10-25 01:02 JST", "不明"], ["2026-10-24", "W45付近", "@Degen_calls_sol", "DegenCalls", "—", "週次4.5", "—", true, 4.5, null, "https://x.com/Degen_calls_sol/status/2114043552837537974", "コスト約$200。DN with QFEX｜地域根拠:英語", "2026-10-25 02:17 JST", "不明"], ["2026-10-24", "W45付近", "@PixelDaddy_", "PixelDaddy_", "—", "週次23", "—", true, 23, null, "https://x.com/PixelDaddy_/status/2114033623045382190", "手数料後PnL +$2.15kと併記｜地域根拠:英語", "2026-10-25 01:37 JST", "不明"], ["2026-11-04", "配布前予想(W47)", "@StocktraderDK", "StocktraderDK", "$766.4K", "予想~30.44（累計462.51）", "—", true, 30.44, 766400, "https://x.com/StocktraderDK/status/2118033455242154201", "配布前の見込み。422 trades / 28 markets｜地域根拠:ハンドルDK・英語", "2026-11-05 02:31 JST", "EU/DK"], ["2026-11-06", "今週(W47)", "@mycndota", "Captain", "$6.89M", "週次6.44", "—", false, 6.44, 6890000, "https://x.com/mycndota/status/2118514426022355381", "中国語。コスト約10.8U/pt。連続4週コスト低下｜地域根拠: 中国語+location HongKong", "2026-11-06 10:22 JST", "アジア/CN・HK"], ["2026-10-30", "前週(W46)", "@mycndota", "Captain", "$13M", "週次10.72", "—", true, 10.72, 13000000, "https://x.com/mycndota/status/2116061544627012025", "中国語・スクショ。コスト約14U/pt・小垢佛系｜地域根拠: 中国語+HongKong", "2026-10-30 15:56 JST", "アジア/CN・HK"], ["2026-10-23", "W45付近", "@mycndota", "Captain", "—", "週次（コスト14U/pt）", "—", true, null, null, "https://x.com/mycndota/status/2113452741565845971", "中国語・スクショ。US30S中心。週次pt本文未明示でコスト中心｜地域根拠: 中国語+HongKong", "2026-10-23 11:09 JST", "アジア/CN・HK"], ["2026-11-06", "今週(W47)", "@AtlasThesis", "Atlas", "$25M", "週次280", "—", true, 280, 25000000, "https://x.com/AtlasThesis/status/2118508108507148378", "フランス語。30日PnL悪いと本人。スクショあり｜地域根拠: 仏語投稿", "2026-11-06 09:57 JST", "EU/FR"], ["2026-11-02", "前週(W46)", "@furon_gabin", "YieldSniffer", "—", "週次0.36", "—", false, 0.36, null, "https://x.com/furon_gabin/status/2117315216123838858", "フランス語。DN with Extended｜地域根拠: 仏語投稿", "2026-11-03 02:57 JST", "EU/FR"], ["2026-10-30", "前週(W46)", "@tonix_C", "Tonixtarck", "$180k", "週次8", "—", false, 8, 180000, "https://x.com/tonix_C/status/2116068806267150675", "スペイン語返信。Ryuzaki比較｜地域根拠: スペイン語", "2026-10-30 16:24 JST", "EU/ES"], ["2026-11-06", "今週(W47)", "@Degen_calls_sol", "DegenCalls", "$300k", "週次6.05", "—", true, 6.05, 300000, "https://x.com/Degen_calls_sol/status/2118497374955782571", "RWA DN vs Lighter。前週報告とは別投稿｜地域根拠: 不明", "2026-11-06 09:15 JST", "不明"], ["2026-11-06", "今週(W47)", "@fnatiqmambo", "mambo", "—", "週次4", "—", true, 4, null, "https://x.com/fnatiqmambo/status/2118514546327597056", "英語・スクショ。少額活動｜地域根拠: 不明", "2026-11-06 10:23 JST", "不明"], ["2026-11-06", "今週(W47)", "@chouchou_tx", "丑丑TX", "—", "配布メタ: 150k pt / 31,959口座", "—", false, null, null, "https://x.com/chouchou_tx/status/2118505071520759979", "個人成績ではなくW47全体集計（口座-334）｜地域根拠: 中国語", "2026-11-06 09:45 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@fubuki_fubukii", "吹雪 Fubuki", "$555k", "週次13.29", "—", true, 13.29, 555000, "https://x.com/fubuki_fubukii/status/2116182838819340513", "中国語。$1Mあたり約24ptと本人｜地域根拠: 中国語投稿", "2026-10-30 23:58 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@CryptoYieldGuy", "Crypto Yield Guy", "$1.5M（XAU）", "週次4.2（+招待14→累計18.2）", "—", true, 4.2, 1500000, "https://x.com/CryptoYieldGuy/status/2116013379001172461", "中国語スクショ。OI $100K+、$XAU Swap｜地域根拠: 中国語投稿（英語ハンドル）", "2026-10-30 12:44 JST", "アジア/CN推定"], ["2026-10-26", "W45付近", "@furon_gabin", "YieldSniffer", "—", "週次0.2", "—", false, 0.2, null, "https://x.com/furon_gabin/status/2114679722399367287", "フランス語。DN with Extended。0.36報告の前週相当｜地域根拠: 仏語投稿", "2026-10-26 20:25 JST", "EU/FR"], ["2026-10-09", "W43", "@Zyak1991", "Zyak1991", "$10M", "週次23", "—", true, 23, 10000000, "https://x.com/Zyak1991/status/2108355692834734150", "英語・スクショ。USOILコスト$627。farming終了宣言｜地域根拠: location Europe", "2026-10-09 09:35 JST", "EU"], ["2026-11-05", "配布メタ(W46→)", "@fubuki_fubukii", "吹雪 Fubuki", "—", "メタ: 150k pt / 32,293口座", "—", true, null, null, "https://x.com/fubuki_fubukii/status/2118211959355322401", "中国語。RISEx/TxFlowと比較の配布メタ｜地域根拠: 中国語", "2026-11-05 14:21 JST", "アジア/CN"], ["2026-10-16", "W44", "@yri911", "Yri", "$2.4M", "週次28.2", "—", true, 28.2, 2400000, "https://x.com/yri911/status/2111231708515246437", "英語・Week44明示。OI $100K・コスト~$17/pt｜地域根拠: 英語", "2026-10-17 08:03 JST", "不明"], ["2026-10-17", "W44", "@0xpostrich", "post rich", "$4.5M", "週次84", "—", true, 84, 4500000, "https://x.com/0xpostrich/status/2111458938562719778", "英語・スクショ。RWA DN with RISEx。$54k vol/pt｜地域根拠: 英語", "2026-10-17 23:06 JST", "不明"], ["2026-10-16", "W44", "@AIexey_Stark", "Alekzz", "—", "週次+65 / 累計313", "—", true, 65, null, "https://x.com/AIexey_Stark/status/2111116379499712890", "英語。短期決済実験で自己最高更新｜地域根拠: CIS/RU推定・英語", "2026-10-17 00:25 JST", "CIS/RU推定"], ["2026-10-16", "W44", "@Im_SHIVya", "SHIVya", "$858K", "週次13.2", "—", true, 13.2, 858000, "https://x.com/Im_SHIVya/status/2111044471848673586", "英語。BTC/ETH/TradFi。Avg OI $55.8K｜地域根拠: 英語", "2026-10-16 19:39 JST", "不明"], ["2026-10-16", "W44", "@Brokelays", "BB", "$20M", "週次232", "—", true, 232, 20000000, "https://x.com/Brokelays/status/2111029144855429185", "英語。低OI RWA+株式・半分Swap｜地域根拠: 英語", "2026-10-16 18:39 JST", "不明"], ["2026-10-16", "W44", "@Last_Resort_X", "Last Resort", "$402k", "週次6.19", "—", true, 6.19, 402000, "https://x.com/Last_Resort_X/status/2111009878709862628", "英語。Vol減でもpt増の効率例｜地域根拠: 英語", "2026-10-16 17:22 JST", "不明"], ["2026-10-16", "W44", "@filthy_hl", "Filthy", "—", "週次29", "—", true, 29, null, "https://x.com/filthy_hl/status/2111001187663089758", "英語。紹介なしと本人｜地域根拠: 英語", "2026-10-16 16:47 JST", "不明"], ["2026-10-16", "W44", "@mycndota", "Captain", "$40.4M", "週次40.4", "—", true, 40.4, 40400000, "https://x.com/mycndota/status/2110997267520094281", "中国語。US100S中心・コスト約25.4U/pt｜地域根拠: 中国語+HongKong", "2026-10-16 16:32 JST", "アジア/CN・HK"], ["2026-10-16", "W44", "@0xBaseee", "Base", "—", "週次170", "—", true, 170, null, "https://x.com/0xBaseee/status/2111092597233983855", "英語。高帯報告｜地域根拠: 英語", "2026-10-16 22:51 JST", "不明"], ["2026-10-16", "W44", "@0xnigma", "nigma", "—", "週次0.39", "—", true, 0.39, null, "https://x.com/0xnigma/status/2111148834411762085", "英語。少額帯・Lighter併記｜地域根拠: 英語", "2026-10-17 02:34 JST", "不明"], ["2026-10-18", "W44", "@Last_Resort_X", "Last Resort", "—", "メタ: W44 150k pt / 32,382口座", "—", true, null, null, "https://x.com/Last_Resort_X/status/2111747217841107338", "英語。口座増で平均4.6pt/口座と分析｜地域根拠: 英語", "2026-10-18 18:12 JST", "不明"], ["2026-10-30", "前週(W46)", "@SkyIsTheTaker", "Krzysztof Dąbrowski", "—", "週次15.91 / 累計1,435.16", "—", true, 15.91, null, "https://x.com/SkyIsTheTaker/status/2116020094140563567", "英語・スクショ。LighterとDN・RWA中心｜地域根拠:ポーランド人名Krzysztof Dąbrowski", "2026-10-30 13:11 JST", "EU/PL推定"], ["2026-10-30", "前週(W46)", "@Maker17368Maker", "JuraganDefi", "$1.4M", "週次27", "—", true, 27, 1400000, "https://x.com/Maker17368Maker/status/2116031636701958640", "インドネシア語。コスト0・PnL+$447｜地域根拠: lang:in・インドネシア語投稿", "2026-10-30 13:57 JST", "アジア/ID"], ["2026-10-23", "W45付近", "@Maker17368Maker", "JuraganDefi", "$2.2M", "週次10.3", "—", true, 10.3, 2200000, "https://x.com/Maker17368Maker/status/2113441003491516669", "インドネシア語。コスト$20-30｜地域根拠: lang:in", "2026-10-23 10:22 JST", "アジア/ID"], ["2026-10-30", "前週(W46)", "@Muallimin_biri", "Muallimin Biri", "—", "週次23（+紹介3→26）", "—", true, 23, null, "https://x.com/Muallimin_biri/status/2116090813373452510", "トルコ語・スクショ。紹介3含むと26｜地域根拠: lang:tr・トルコ語投稿", "2026-10-30 17:52 JST", "中東/TR"], ["2026-10-16", "W44", "@thiagocastroco1", "Thiago CCS", "—", "週次0.98 / 累計261.48", "5591位", true, 0.98, null, "https://x.com/thiagocastroco1/status/2110887788279136483", "ポルトガル語・スクショ。週次+0.983｜地域根拠: lang:pt・ブラジル系名", "2026-10-16 09:17 JST", "LATAM/BR"], ["2026-10-09", "W43", "@MaitreSarce", "MaitreSarce", "$120-140k", "週次5", "—", true, 5, 130000, "https://x.com/MaitreSarce/status/2108454407432020231", "フランス語・スクショ。2週目結果｜地域根拠: location France・仏語", "2026-10-09 16:07 JST", "EU/FR"], ["2026-10-30", "前週(W46)", "@yihan0202", "Han", "$13M", "週次約30", "—", true, 30, 13000000, "https://x.com/yihan0202/status/2116105345026363768", "繁体字。約$430k Vol/1ptと本人｜地域根拠: 繁体字中国語（TW可能性あり）", "2026-10-30 18:50 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@qingfeng136", "清风🐬", "—", "週次8", "—", false, 8, null, "https://x.com/qingfeng136/status/2116044796171309528", "返信内の数字｜地域根拠: 中国語", "2026-10-30 14:49 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@halamad75372801", "hala madrid 💙🧡| ❤️", "$3M", "週次48", "—", true, 48, 3000000, "https://x.com/halamad75372801/status/2116024637092200735", "W46全体150k/32,293口座にも言及｜地域根拠: 中国語", "2026-10-30 13:29 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@chouchou_tx", "丑丑TX", "—", "配布メタ: 150k pt / 32,293口座", "—", false, null, null, "https://x.com/chouchou_tx/status/2116008382192922899", "個人成績ではなくW46全体集計（口座-9）｜地域根拠: 中国語", "2026-10-30 12:24 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@LEObtc911", "LEObtc", "$20k", "週次4", "—", false, 4, 20000, "https://x.com/LEObtc911/status/2116006538783682670", "返信。小型銘柄のトレンド保有で加成高と本人｜地域根拠: 中国語", "2026-10-30 12:17 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@shho91425216", "何处惹尘埃", "$2.3M（前日投稿）", "週次10未満", "—", false, null, 2300000, "https://x.com/shho91425216/status/2115972962558091623", "BTC/US300中心。前日投稿で2.3M・10pt前後と予想｜地域根拠: 中国語", "2026-10-30 10:04 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@xkfai", "Wolf", "$55.88k", "週次6", "—", true, 6, 55880, "https://x.com/xkfai/status/2115961039296901576", "アルト/小型銘柄のみ。PnL+400超と本人｜地域根拠: 中国語", "2026-10-30 09:16 JST", "アジア/CN"], ["2026-10-30", "前週(W46)", "@yuanxs1341", "袁方方", "—", "累計1到達", "—", true, null, null, "https://x.com/yuanxs1341/status/2115970437704511700", "極小資金で1ptライン到達、約54U損と本人｜地域根拠: 中国語", "2026-10-30 09:53 JST", "アジア/CN"], ["2026-11-05", "前週(W46)", "@chainalab", "Hanbing", "—", "累計86.39（本人5週目時点）", "—", true, null, null, "https://x.com/chainalab/status/2118166006673952815", "均価1.46U/pt。ヘッジ口座で損失。週次か累計か曖昧｜地域根拠: 中国語", "2026-11-05 11:18 JST", "アジア/CN"], ["2026-10-26", "W45付近", "@Vannnn8866", "Vannnn . Var", "$9M", "週次49", "—", true, 49, 9000000, "https://x.com/Vannnn8866/status/2114576004303986988", "PnL+$60と本人｜地域根拠: 中国語", "2026-10-26 13:33 JST", "アジア/CN"], ["2026-10-23", "W45付近", "@dxyzor", "dxyzor", "$100k", "週次6", "—", false, 6, 100000, "https://x.com/dxyzor/status/2113667670902235383", "返信。量化・100超銘柄・新口座｜地域根拠: 中国語（location LA）", "2026-10-24 01:23 JST", "アジア/CN推定"], ["2026-10-23", "W45付近", "@0xDouble77", "Double", "$200k+", "週次1.07", "—", true, 1.07, 200000, "https://x.com/0xDouble77/status/2113602378868142274", "Arcusとヘッジ（Arcus側11.17）｜地域根拠: 中国語", "2026-10-23 21:04 JST", "アジア/CN"], ["2026-10-23", "W45付近", "@callmelaoxu", "叫我老徐⚡️Rossi", "—", "週次200（前週4）", "—", true, 200, null, "https://x.com/callmelaoxu/status/2113487481425571873", "前週4から急増と本人｜地域根拠: 中国語+location Kowloon City", "2026-10-23 13:27 JST", "アジア/CN・HK"], ["2026-10-23", "W45付近", "@xkfai", "Wolf", "$23K", "週次0.7", "—", true, 0.7, 23000, "https://x.com/xkfai/status/2113432705174286638", "少額帯の効率例｜地域根拠: 中国語", "2026-10-23 09:49 JST", "アジア/CN"], ["2026-10-18", "W44", "@0xDouble77", "Double", "$300k+", "週次1.59", "—", true, 1.59, 300000, "https://x.com/0xDouble77/status/2111798952798658895", "Arcusとヘッジ｜地域根拠: 中国語", "2026-10-18 21:38 JST", "アジア/CN"], ["2026-10-17", "W44", "@BiAnLianYou", "赚钱格格巫", "$25M", "週次44.5", "—", true, 44.5, 25000000, "https://x.com/BiAnLianYou/status/2111287382679175471", "約$560k Vol/pt。US100中心、トレード益+1,500｜地域根拠: 中国語", "2026-10-17 11:45 JST", "アジア/CN"], ["2026-10-16", "W44", "@5urfer1in", "5urfer-浪人 🪑", "—", "週次2超", "—", true, null, null, "https://x.com/5urfer1in/status/2111213141384196296", "繁体字。初めて2pt超と本人｜地域根拠: 繁体字・location asia", "2026-10-17 06:50 JST", "アジア/CN"], ["2026-10-16", "W44", "@zaijin338191", "在金", "$450k", "週次4", "—", true, 4, 450000, "https://x.com/zaijin338191/status/2111115430484140066", "Extended/Lighter/Entropy併用｜地域根拠: 中国語", "2026-10-17 00:21 JST", "アジア/CN"], ["2026-10-16", "W44", "@GtGt868", "上官在野OTC", "$2M", "週次約50", "—", true, 50, 2000000, "https://x.com/GtGt868/status/2110976411511161310", "実トレード中心と本人｜地域根拠: 中国語", "2026-10-16 15:09 JST", "アジア/CN"], ["2026-10-16", "W44", "@Vannnn8866", "Vannnn . Var", "$7M前後", "週次約40", "—", true, 40, 7000000, "https://x.com/Vannnn8866/status/2110931559541043458", "コスト4U/pt未満と本人｜地域根拠: 中国語", "2026-10-16 12:11 JST", "アジア/CN"], ["2026-10-16", "W44", "@BuTongRen6", "BuTongRen", "$12M", "週次22", "—", true, 22, 12000000, "https://x.com/BuTongRen6/status/2110927837243023397", "全量Swap・ほぼ0損耗。前週は50超｜地域根拠: 中国語", "2026-10-16 11:56 JST", "アジア/CN"], ["2026-10-16", "W44", "@qingfeng136", "清风🐬", "—", "週次17", "—", false, 17, null, "https://x.com/qingfeng136/status/2110920617155612895", "返信内の数字｜地域根拠: 中国語", "2026-10-16 11:27 JST", "アジア/CN"], ["2026-10-16", "W44", "@btc_juanmao", "沧海一卷毛", "$1.5M", "週次6.2", "—", false, 6.2, 1500000, "https://x.com/btc_juanmao/status/2110898596614983995", "Swap。US100含み損約5,000U｜地域根拠: 中国語", "2026-10-16 10:00 JST", "アジア/CN"], ["2026-10-16", "W44", "@xkfai", "Wolf", "—", "週次4", "—", true, 4, null, "https://x.com/xkfai/status/2110894067806851403", "安定と本人｜地域根拠: 中国語", "2026-10-16 09:42 JST", "アジア/CN"], ["2026-10-16", "W44", "@Airdrop_Guard", "小熊饼干 . var⛵", "$250M", "週次465", "—", true, 465, 250000000, "https://x.com/Airdrop_Guard/status/2110892106558710181", "約$530k Vol/pt。量での獲得は困難と本人｜地域根拠: 中国語", "2026-10-16 09:34 JST", "アジア/CN"]];
+// columns: 0 date,1 weekLabel,2 handle,3 name,4 volText,5 ptsText,6 rank,7 hasSS,8 pts,9 vol,10 url,11 note,12 postedJST,13 region
+const WEEK_META={W47:"配布 2026-11-06（金曜 0:00 UTC）",W46:"配布 2026-10-30",W45:"配布 2026-10-23",W44:"配布 2026-10-16"};
+function weekKey(r){const l=r[1];
+  if(l.includes("W47")||l.startsWith("今週"))return"W47";
+  if(l.includes("W46")||l.startsWith("前週"))return"W46";
+  if(l.includes("W45"))return"W45";if(l.includes("W44"))return"W44";if(l.includes("W43"))return"W43";
+  if(r[0]>="2026-10-31")return"W47";if(r[0]>="2026-10-24")return"W46";if(r[0]>="2026-10-17")return"W45";if(r[0]>="2026-10-10")return"W44";return"W43";}
+const isAsia=g=>g.includes("アジア")||g.includes("中東")||g.includes("IN");
+const isJP=g=>g.includes("JP"), isCH=g=>g.includes("CN"), isKR=g=>g.includes("KR");
+const isOther=g=>isAsia(g)&&!isJP(g)&&!isCH(g)&&!isKR(g);
+const isEU=g=>g.includes("EU"), isCIS=g=>g.includes("CIS")||g.includes("RU"), isLatam=g=>g.includes("LATAM")||g.includes("南米")||g.includes("/BR"), isUnk=g=>g==="不明";
+const REGION={all:()=>true,asia:isAsia,eu:isEU,cis:isCIS,latam:isLatam,unk:isUnk};
+const ASIA={all:isAsia,jp:isJP,ch:isCH,kr:isKR,other:isOther};
+function parseRank(s){if(!s||s==="—")return Infinity;const m=s.replace(/[#,位]/g,"").match(/(\d+)/);return m?+m[1]:Infinity}
+function fmtPts(n){if(n==null)return"—";const v=Number.isInteger(n)?n:Math.round(n*100)/100;return v.toLocaleString("en-US",{maximumFractionDigits:2})}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const LINK_ICON='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M11 9.5V13H3V5h3.5"/></svg>';
+
+const S={week:"W47",region:"all",asia:"all",ss:"all",sort:"pts"};
+const counts={W47:0,W46:0,W45:0,W44:0};DATA.forEach(r=>{const k=weekKey(r);if(k in counts)counts[k]++});
+
+function seg(el,opts,cur,on){el.innerHTML=opts.map(o=>`<button type="button" data-v="${o.v}" aria-pressed="${o.v===cur}">${esc(o.l)}${o.c!=null?`<span class="c">${o.c}</span>`:""}</button>`).join("");
+  el.querySelectorAll("button").forEach(b=>b.onclick=()=>on(b.dataset.v));}
+function bars(el,items){const max=Math.max(1,...items.map(i=>i.v));
+  el.innerHTML=items.length?items.map(i=>`<div class="bar"><span class="lab">${esc(i.l)}</span><span class="track"><span class="fill" style="width:${(i.v/max*100).toFixed(1)}%"></span></span><span class="num">${i.v}件</span></div>`).join(""):'<div class="raw">該当なし</div>';}
+function regionBars(rows){return[["アジア",isAsia],["EU",isEU],["CIS/RU",isCIS],["LATAM",isLatam],["不明",isUnk]].map(([l,t])=>({l,v:rows.filter(r=>t(r[13])).length})).filter(b=>b.v>0).sort((a,b)=>b.v-a.v)}
+function asiaBars(rows){return[["JP",isJP],["CH",isCH],["KR",isKR],["その他アジア",isOther]].map(([l,t])=>({l,v:rows.filter(r=>t(r[13])).length})).filter(b=>b.v>0).sort((a,b)=>b.v-a.v)}
+function props(el,items){el.innerHTML=items.map(([k,v])=>`<div class="prop"><div class="k">${esc(k)}</div><div class="val">${esc(v)}</div></div>`).join("")}
+
+function renderTabs(){const t=document.getElementById("tabs");
+  const opts=[["W47",counts.W47],["W46",counts.W46],["W45",counts.W45],["W44",counts.W44],["overview",null]];
+  t.innerHTML=opts.map(([v,c])=>`<button class="tab" role="tab" data-v="${v}" aria-selected="${S.week===v}">${v==="overview"?"概要":v}${c!=null?`<span class="c">${c}</span>`:""}</button>`).join("");
+  t.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.week=b.dataset.v;location.hash=S.week;render()});}
+
+function renderWeek(){
+  const rows=DATA.filter(r=>weekKey(r)===S.week);
+  const pts=rows.map(r=>r[8]).filter(x=>x!=null).sort((a,b)=>b-a);
+  document.getElementById("wkTitle").textContent=S.week;
+  document.getElementById("wkCap").textContent=WEEK_META[S.week];
+  props(document.getElementById("wkProps"),[["件数",rows.length+"件"],["週次pt 数値あり",pts.length+"件"],["週次pt 帯",pts.length?fmtPts(pts[pts.length-1])+" 〜 "+fmtPts(pts[0]):"—"],["スクショあり",rows.filter(r=>r[7]).length+"件"]]);
+  const rb=regionBars(rows);document.getElementById("wkBarsWrap").hidden=rb.length<2;bars(document.getElementById("wkBars"),rb);
+  seg(document.getElementById("segRegion"),[["all","全域"],["asia","アジア"],["eu","EU"],["cis","CIS"],["latam","LATAM"],["unk","不明"]].map(([v,l])=>({v,l,c:rows.filter(r=>REGION[v](r[13])).length})),S.region,v=>{S.region=v;if(v!=="asia")S.asia="all";renderWeek()});
+  seg(document.getElementById("segSS"),[{v:"all",l:"全件"},{v:"ss",l:"スクショのみ"}],S.ss,v=>{S.ss=v;renderWeek()});
+  const ar=document.getElementById("asiaRow");ar.hidden=S.region!=="asia";
+  if(S.region==="asia")seg(document.getElementById("segAsia"),[["all","全部"],["jp","JP"],["ch","CH"],["kr","KR"],["other","その他"]].map(([v,l])=>({v,l,c:rows.filter(r=>ASIA[v](r[13])).length})),S.asia,v=>{S.asia=v;renderWeek()});
+  let f=rows.slice();
+  if(S.ss==="ss")f=f.filter(r=>r[7]);
+  f=f.filter(r=>REGION[S.region](r[13]));
+  if(S.region==="asia"&&S.asia!=="all")f=f.filter(r=>ASIA[S.asia](r[13]));
+  f.sort((a,b)=>{if(S.sort==="date")return b[0].localeCompare(a[0])||b[12].localeCompare(a[12]);
+    if(S.sort==="pts")return(b[8]??-1)-(a[8]??-1);if(S.sort==="vol")return(b[9]??-1)-(a[9]??-1);return parseRank(a[6])-parseRank(b[6]);});
+  document.getElementById("tblCap").textContent=`${f.length} / ${rows.length} 件を表示`;
+  document.getElementById("tbody").innerHTML=f.length?f.map(r=>{const note=(r[11].split("｜")[0]||r[11]);const basis=r[11].includes("｜")?r[11].split("｜").slice(1).join("｜"):"";
+    return `<tr>
+<td class="date" data-k="日付">${esc(r[0].slice(5))}<div class="raw">${esc(r[1])}</div></td>
+<td class="who-cell"><div class="who">${esc(r[2])}<small>${esc(r[3])}</small></div></td>
+<td data-k="SS">${r[7]?'<span class="ss">SS</span>':'<span class="raw">—</span>'}</td>
+<td class="num pts" data-k="週次pt">${fmtPts(r[8])}<div class="raw">${esc(r[5])}</div></td>
+<td class="num" data-k="Vol">${esc(r[4])}</td>
+<td class="num" data-k="順位">${esc(r[6])}</td>
+<td data-k="地域"><span class="reg">${esc(r[13])}</span></td>
+<td data-k="メモ"><div class="note">${esc(note)}</div>${basis?`<div class="raw">${esc(basis.trim())}</div>`:""}</td>
+<td data-k="投稿"><a class="link" href="${esc(r[10])}" target="_blank" rel="noopener">X で開く ${LINK_ICON}</a><div class="raw">${esc(r[12])}</div></td></tr>`}).join(""):`<tr><td colspan="9" class="empty">条件に合う報告はありません</td></tr>`;
+}
+
+function renderOverview(){
+  const w47=DATA.filter(r=>weekKey(r)==="W47"&&r[8]!=null);const p=w47.map(r=>r[8]).sort((a,b)=>b-a);
+  const ch=DATA.filter(r=>isCH(r[13])).length;
+  document.getElementById("ovMetrics").innerHTML=[[String(DATA.length),"報告","10/09–11/06"],[p.length?fmtPts(p[p.length-1])+"–"+fmtPts(p[0]):"—","W47 週次pt","数値あり "+w47.length+"件"],[String(ch),"CH 報告","中国語圏・CN/HK"],["0","RU 語報告","数値スクショ"]].map(([v,l,d])=>`<div class="metric"><div class="v">${esc(v)}</div><div class="l">${esc(l)}</div><div class="d">${esc(d)}</div></div>`).join("");
+  bars(document.getElementById("ovBars"),regionBars(DATA));bars(document.getElementById("ovAsiaBars"),asiaBars(DATA));
+  props(document.getElementById("ovW47"),[["数値あり",w47.length+"件"],["全体（非公式・報告ベース）","150k pt / 約31,959口座"]]);
+}
+
+function render(){renderTabs();const ov=S.week==="overview";
+  document.getElementById("weekView").hidden=ov;document.getElementById("overView").hidden=!ov;
+  ov?renderOverview():renderWeek();}
+document.getElementById("sortSel").onchange=e=>{S.sort=e.target.value;renderWeek()};
+document.getElementById("heroMeta").textContent=`収録 ${DATA.length} 件 ・ 対象期間 2026-10-09 〜 2026-11-06（JST）・ 数値は自己申告`;
+const h=location.hash.slice(1);if(["W47","W46","W45","W44","overview"].includes(h))S.week=h;
+render();
+</script>
+</body>
+</html>
